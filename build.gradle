@@ -1,15 +1,24 @@
 plugins {
-    // Apply the java plugin to add support for Java
+    // Apply the java plugin to add support for Java (with this you can run any java task)
     id 'java'
-    // Apply the application plugin to add support for building a CLI application.
-    id 'application'
+    id "org.springframework.boot" version "2.2.6.RELEASE"
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
 }
 repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    // Use repository for resolving dependencies.
+    mavenCentral()
 }
+
+ext {
+    springVersion = '2.2.6.RELEASE'
+}
+
 dependencies {
+    //Spring
+    implementation ("org.springframework.boot:spring-boot-starter-parent:$springVersion")
+    implementation ("org.springframework.boot:spring-boot-dependencies:$springVersion")
+    implementation ("org.springframework.boot:spring-boot-starter-web:$springVersion")
+
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.2-jre'
 
@@ -19,13 +28,15 @@ dependencies {
     // Use JUnit Jupiter Engine for testing.
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.0'
 }
-application {
-    // Define the main class for the application.
-    mainClassName = 'demo.App'
-}
+
 test {
     // Use junit platform for unit tests
     useJUnitPlatform()
+}
+
+
+ext {
+    springVersion = '2.2.6.RELEASE'
 }
 
 
