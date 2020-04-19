@@ -1,0 +1,76 @@
+{
+  "info": {
+    "_postman_id": "67e630cd-4920-4c4a-adea-90bc564ba64b",
+    "name": "Develociraptor",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "GET user",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "f0664a50-f631-4d9d-a7f6-24e4005becf9",
+            "exec": [
+              "pm.test(\"Status code is 200\", function() {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "pm.test(\"Response is valid and have a body\", function(){",
+              "    pm.response.to.be.ok;",
+              "    pm.response.to.be.withBody;",
+              "    pm.response.to.be.json;",
+              "})",
+              "pm.test(\"Body is correct\", function(){",
+              "    var json = pm.response.json();",
+              "    var x = json[\"userId\"];",
+              "    pm.expect(x).to.eql(1);",
+              "})",
+              "",
+              "var Ajv = require('ajv'),",
+              "    ajv = new Ajv({logger: console}),",
+              "    schema = {",
+              "        \"type\": \"object\",",
+              "        \"properties\": {",
+              "            \"userId\": {",
+              "                \"type\": \"integer\"",
+              "            },",
+              "            \"userNname\": {",
+              "                \"type\": \"string\"",
+              "            },",
+              "            \"password\": {",
+              "                \"type\": \"string\"",
+              "            },",
+              "        },",
+              "    };",
+              "pm.test(\"Schema is correct\", function(){",
+              "    pm.expect(ajv.validate(schema, pm.response.json())).to.be.true;",
+              "})",
+              "",
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{APIURL}}/user/1",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "user",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
