@@ -3,14 +3,27 @@
  */
 package demo;
 
+import demo.web.controller.server.HttpServerVerticle;
+import io.vertx.core.Vertx;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import javax.annotation.PostConstruct;
 
 @SpringBootApplication
 public class App {
 
+    @Autowired
+    private HttpServerVerticle httpServerVerticle;
+
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
+    }
+
+    @PostConstruct
+    public void deployServer() {
+        Vertx.vertx().deployVerticle(httpServerVerticle);
     }
 
 }

@@ -11,6 +11,7 @@ repositories {
 
 ext {
     springVersion = '2.2.6.RELEASE'
+    vertxVersion = '3.9.0'
 }
 
 dependencies {
@@ -18,6 +19,11 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-parent:$springVersion")
     implementation ("org.springframework.boot:spring-boot-dependencies:$springVersion")
     implementation ("org.springframework.boot:spring-boot-starter-web:$springVersion")
+
+    //Vertx
+    implementation "io.vertx:vertx-web:$vertxVersion"
+    implementation "io.vertx:vertx-web-api-contract:$vertxVersion"
+    implementation "io.vertx:vertx-rx-java2:$vertxVersion"
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.2-jre'

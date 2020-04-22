@@ -1,4 +1,4 @@
-package demo.model;
+package demo.domain.model;
 
 public class User {
     private Integer userId;
