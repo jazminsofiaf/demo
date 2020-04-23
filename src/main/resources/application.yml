@@ -1,0 +1,29 @@
+spring:
+  profiles: test
+environment: test
+
+vertx:
+  server:
+    port: 8080
+    context-path: "/api"
+
+
+---
+spring:
+  profiles: dev
+environment: dev
+
+vertx:
+  server:
+    port: 8081
+    context-path: "/api"
+
+---
+spring:
+  profiles: prod
+environment: prod
+
+vertx:
+  server:
+    port: 8082
+    context-path: "/api"

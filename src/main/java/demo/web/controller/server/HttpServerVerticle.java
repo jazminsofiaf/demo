@@ -5,6 +5,7 @@ import io.vertx.core.Future;
 import io.vertx.core.AbstractVerticle;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 
@@ -12,12 +13,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class HttpServerVerticle extends AbstractVerticle {
 
+    @Value("${vertx.server.port}")
+    private int serverPort;
+
+    private UserRouter userRouter;
+
     @Autowired
-    UserRouter userRouter;
+    public HttpServerVerticle(UserRouter userRouter) {
+        this.userRouter = userRouter;
+    }
 
     @Override
     public void start(Future<Void> fut) {
-        vertx.createHttpServer().requestHandler(userRouter.getUser(vertx)).listen(8080);
+        vertx.createHttpServer().requestHandler(userRouter.getUser(vertx)).listen(serverPort);
     }
 
 
